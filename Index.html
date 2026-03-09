@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Contagem de Estoque</title>
+
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+
+</head>
+
+<body>
+
+<h2>Contagem de Estoque</h2>
+
+<pre id="dados"></pre>
+
+<button onclick="enviar()">Enviar para WhatsApp</button>
+
+<script>
+
+var firebaseConfig = {
+apiKey: "SUA_API_KEY",
+authDomain: "SEU_PROJETO.firebaseapp.com",
+databaseURL: "https://SEU_PROJETO-default-rtdb.firebaseio.com",
+projectId: "SEU_PROJETO",
+};
+
+firebase.initializeApp(firebaseConfig);
+
+var db = firebase.database().ref("contagem");
+
+db.on("value", function(snapshot){
+
+let dados = snapshot.val();
+
+let texto = "Contagem de estoque:%0A";
+
+for (let item in dados){
+texto += item + ": " + dados[item] + "%0A";
+}
+
+document.getElementById("dados").innerText = texto;
+
+window.mensagem = texto;
+
+});
+
+function enviar(){
+
+let numero = "55SEUNUMERO";
+
+let link = "https://wa.me/" + numero + "?text=" + window.mensagem;
+
+window.open(link);
+
+}
+
+</script>
+
+</body>
+</html>
