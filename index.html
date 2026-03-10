@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Estoque da Loja</title>
+</head>
+
+<body>
+
+<h1>Estoque da Loja</h1>
+
+<ul id="lista"></ul>
+
+<script>
+
+fetch("https://estoque-4cb33-default-rtdb.firebaseio.com/Lsc.json")
+.then(response => response.json())
+.then(data => {
+
+let lista = document.getElementById("lista");
+
+for (let produto in data) {
+
+let item = document.createElement("li");
+
+item.innerText = produto + " : " + data[produto];
+
+lista.appendChild(item);
+
+}
+
+});
+
+</script>
+
+</body>
+</html>
