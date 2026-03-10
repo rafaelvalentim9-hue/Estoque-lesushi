@@ -53,19 +53,28 @@ fetch("https://estoque-4cb33-default-rtdb.firebaseio.com/Lsc.json")
 
 let lista = document.getElementById("lista");
 
-for (let produto in data) {
+for (let categoria in data) {
+
+let titulo = document.createElement("h2");
+titulo.innerText = categoria;
+titulo.style.color = "salmon";
+
+lista.appendChild(titulo);
+
+for (let produto in data[categoria]) {
 
 let item = document.createElement("li");
 
-item.innerText = produto + " : " + data[produto];
+item.innerText = produto + " : " + data[categoria][produto];
 
 lista.appendChild(item);
+
+}
 
 }
 
 });
 
 </script>
-
 </body>
 </html>
